@@ -5,3 +5,4 @@ qdrant-client==1.9.1
 "unstructured[md]"
 fastembed==0.2.7
 flashrank==0.2.4
+sentence-transformers
