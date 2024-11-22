@@ -135,6 +135,7 @@ query = "Can a local resident who is permanently settled get citizenship?"
 similar_docs = qdrant.similarity_search_with_score(query)
 
 # for doc, score in similar_docs:
+#
 #     print(f"text: {doc.page_content[:256]}\n")
 #     print(f"score: {score}")
 #     print("-" * 80)
