@@ -114,8 +114,8 @@ loader = CustomMarkdownLoader(file_path)
 loaded_documents = loader.load()
 
 # Check loaded content
-for doc in loaded_documents:
-    print(f"Content: {doc.page_content}\nMetadata: {doc.metadata}")
+# for doc in loaded_documents:
+#     print(f"Content: {doc.page_content}\nMetadata: {doc.metadata}")
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=2048, chunk_overlap=128)
 docs = text_splitter.split_documents(loaded_documents)
@@ -189,7 +189,7 @@ qa = RetrievalQA.from_chain_type(
 )
 
 
-#response = qa.invoke("To give Nepali citizenship certificate to citizens based on what documents?")
+response = qa.invoke("To give Nepali citizenship certificate to citizens based on what documents?")
 
 
 qa = RetrievalQA.from_chain_type(
@@ -203,7 +203,7 @@ qa = RetrievalQA.from_chain_type(
 response = qa.invoke("i want to make citizenship?")
 
 
-#print_response(response)
+print_response(response)
 
 
 def qry(user_input):
