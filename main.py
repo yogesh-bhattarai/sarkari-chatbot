@@ -205,7 +205,34 @@ response = qa.invoke("i want to make citizenship?")
 
 print_response(response)
 
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-def qry(user_input):
-  response = qa.invoke(user_input)
-  return response
+# Load the M2M100 model and tokenizer
+model_name = "facebook/m2m100_418M"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+
+
+def translate_to_nepali(text):
+    """
+    Translate the given text from English to Nepali using the M2M100 model.
+    """
+    tokenizer.src_lang = "en"  # Source language: English
+    inputs = tokenizer(text, return_tensors="pt")
+
+    # Generate translation to Nepali
+    outputs = model.generate(inputs["input_ids"], forced_bos_token_id=tokenizer.lang_code_to_id["ne"])
+    translated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    return translated_text
+
+
+# Test the translation function
+if __name__ == "__main__":
+    english_text = "What are the required documents for Nepali citizenship?"
+    nepali_translation = translate_to_nepali(english_text)
+    print("Original Text:", english_text)
+    print("Translated Text:", nepali_translation)
+
+
+
